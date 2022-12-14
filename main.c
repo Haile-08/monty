@@ -10,10 +10,9 @@
 
 int main(int ac, char* av[])
 {
-	int fd;
-	char dilm[5] = "./n/a/t";
-	char *tok;
-	char *format = "m";
+	int fd, line_number, line_size, c_read;
+	char dilm[5] = ".\t\r\n";
+	char *tok, *format = "m", line;
 
 	if (ac != 2)
 	{
@@ -33,4 +32,11 @@ int main(int ac, char* av[])
 		fprintf(2, "Error: wrong monty file");
 		exit(EXIT_FAILURE);
 	}
+	line_number = 1;
+	line_size = 0;
+	while ((c_read = getline(&line, &line_size, fd)) != -1)
+	{
+
+	}
+
 }
