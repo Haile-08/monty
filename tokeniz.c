@@ -11,9 +11,9 @@
 
 void tokeniz(char* line, int line_number)
 {
-	char *tok, dilm = " \t\r\n";
+	char *tok, *dilm = " \t\r\n";
 	int i;
-	stack_t ptr;
+	stack_t *ptr;
 
 	instruction_t task[] = {
 		{"push", push_int},
@@ -24,8 +24,9 @@ void tokeniz(char* line, int line_number)
 	ptr = malloc(sizeof(stack_t));
 	if (ptr == NULL)
 	{
-		fprintf(2, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
+	}
 	while (tok != NULL)
 	{
 		i = 0;
@@ -37,7 +38,7 @@ void tokeniz(char* line, int line_number)
 				ptr->n = atoi(tok);
 				ptr->prev = NULL;
 				ptr->next = NULL;
-				task[i].f(ptr, line_number);
+				task[i].f(&ptr, line_number);
 			}
 			++i;
 		}

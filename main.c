@@ -1,4 +1,6 @@
 #include "monty.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * main - Entry point
@@ -10,33 +12,36 @@
 
 int main(int ac, char* av[])
 {
-	int fd, line_number, line_size, c_read;
+	int line_number, c_read;
+	FILE *fd;
 	char dilm[5] = ".\t\r\n";
-	char *tok, *format = "m", line;
+	char *tok, *format = "m", *line;
 
 	if (ac != 2)
 	{
-		fprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fd = open(av[1], O_RDONLY);
+	fd = fopen(av[1], O_RDONLY);
 	if (fd == NULL)
 	{
-		fprintf(2, "Error: Can't open file %s\n", av[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	tok = strtok(av[1], dilm);
 	tok = strtok(0, dilm);
 	if (tok != format)
 	{
-		fprintf(2, "Error: wrong monty file");
+		fprintf(stderr, "Error: wrong monty file");
 		exit(EXIT_FAILURE);
 	}
 	line_number = 1;
-	line_size = 0;
-	while ((c_read = getline(&line, &line_size, fd)) != -1)
+	while ((c_read = getline(&line, NULL, fd)) != -1)
 	{
-
+		tokeniz(line,line_number);
 	}
-
+	fclose(fd);
+	if (line)
+		free(line);
+	return (0);
 }

@@ -1,6 +1,7 @@
 #ifndef HEADER_MONTY
 #define HEADER_MONTY
 
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -35,5 +36,10 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+stack_t *temp;
+void tokeniz(char* line, int line_number);
+void push_int(stack_t **stack, __attribute__((unused))unsigned int line_number);
+void print_all(__attribute__((unused))stack_t **stack,__attribute__((unused)) unsigned int line_number);
 
 #endif
