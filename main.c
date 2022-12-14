@@ -14,31 +14,27 @@ int main(int ac, char* av[])
 {
 	int line_number, c_read;
 	FILE *fd;
-	char dilm[5] = ".\t\r\n";
-	char *tok, *format = "m", *line;
+	char *line;
+	size_t len = 0;
 
+	printf("DEBUG: FILE NAME = %s\n", av[1]);
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fd = fopen(av[1], O_RDONLY);
+	printf("DEBUG: NUMBER OF AGGUMENT: %d\n", ac);
+	fd = fopen(av[1], "r");
 	if (fd == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	tok = strtok(av[1], dilm);
-	tok = strtok(0, dilm);
-	if (tok != format)
-	{
-		fprintf(stderr, "Error: wrong monty file");
-		exit(EXIT_FAILURE);
-	}
 	line_number = 1;
-	while ((c_read = getline(&line, NULL, fd)) != -1)
+	while ((c_read = getline(&line, &len, fd)) != -1)
 	{
-		tokeniz(line,line_number);
+		printf("DEBUGG LINE %d: %s\n", line_number, line);
+		/* tokeniz(line,line_number); */
 	}
 	fclose(fd);
 	if (line)
