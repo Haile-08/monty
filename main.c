@@ -33,8 +33,7 @@ int main(int ac, char* av[])
 	line_number = 1;
 	while ((c_read = getline(&line, &len, fd)) != -1)
 	{
-		printf("DEBUGG LINE %d: %s\n", line_number, line);
-		/* tokeniz(line,line_number); */
+		tokeniz(line,line_number);
 	}
 	fclose(fd);
 	if (line)

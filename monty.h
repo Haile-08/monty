@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -41,5 +42,6 @@ stack_t *temp;
 void tokeniz(char* line, int line_number);
 void push_int(stack_t **stack, __attribute__((unused))unsigned int line_number);
 void print_all(__attribute__((unused))stack_t **stack,__attribute__((unused)) unsigned int line_number);
+int isNumber(char *s);
 
 #endif
