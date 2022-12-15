@@ -11,30 +11,10 @@
 
 void push_int(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ptr;
-
 	if (isNumber(strtok(var.num, "$\n\t")))
 	{
 		(void)line_number;
-		ptr = malloc(sizeof(stack_t));
-		if (ptr == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed");
-			exit(EXIT_FAILURE);
-		}
-		ptr->n = atoi(strtok(var.num, "$\n\t"));
-		if (*stack == NULL)
-		{
-			ptr->next = NULL;
-			ptr->prev = NULL;
-			*stack = ptr;
-		}
-		else
-		{
-			ptr->prev = NULL;
-			ptr->next = *stack;
-			*stack = ptr;
-		}
+		newnode(stack, atoi(strtok(var.num, "$\n\t")));
 	}
 	else
 	{
