@@ -21,11 +21,12 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 	tok = strtok(line, " \n\t");
 	if (strcmp(tok, "$") == 0)
 		return (0);
+	var.num = strtok(NULL, " \n\t");
+	tok = strtok(tok, "$");
 	while (task[i].opcode != NULL)
 	{
 		if (strcmp(tok, task[i].opcode) == 0)
 		{
-			var.num = strtok(NULL, " \n\t");
 			task[i].f(stack, line_number);
 			return (0);
 		}
