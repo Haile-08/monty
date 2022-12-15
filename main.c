@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+var_t var_v = {0};
+
 /**
  * main - Entry point
  * @ac: the number of args
@@ -16,14 +18,13 @@ int main(int ac, char* av[])
 	FILE *fd;
 	char *line;
 	size_t len = 0;
+	stack_t *stack = NULL;
 
-	printf("DEBUG: FILE NAME = %s\n", av[1]);
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("DEBUG: NUMBER OF AGGUMENT: %d\n", ac);
 	fd = fopen(av[1], "r");
 	if (fd == NULL)
 	{
@@ -33,10 +34,10 @@ int main(int ac, char* av[])
 	line_number = 1;
 	while ((c_read = getline(&line, &len, fd)) != -1)
 	{
-		tokeniz(line,line_number);
+		tokeniz(line,line_number, &stack);
 	}
+	free(line);
+	free_stack(stack);
 	fclose(fd);
-	if (line)
-		free(line);
 	return (0);
 }

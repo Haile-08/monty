@@ -38,10 +38,17 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *temp;
-void tokeniz(char* line, int line_number);
+typedef struct var
+{
+	char *num;
+} var_t;
+
+extern var_t var_v;
+
+int tokeniz(char* line, int line_number, stack_t **stack);
 void push_int(stack_t **stack, __attribute__((unused))unsigned int line_number);
-void print_all(__attribute__((unused))stack_t **stack,__attribute__((unused)) unsigned int line_number);
+void print_all(stack_t **stack,__attribute__((unused)) unsigned int line_number);
 int isNumber(char *s);
+void free_stack(stack_t *stack);
 
 #endif

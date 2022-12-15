@@ -9,15 +9,15 @@
  * Return: none
  */
 
-void print_all(__attribute__((unused))stack_t **stack,__attribute__((unused)) unsigned int line_number)
+void print_all(stack_t **stack,__attribute__((unused)) unsigned int line_number)
 {
 	stack_t *ptr;
-	ptr = temp;
+	ptr = *stack;
 	if (ptr == NULL)
 	{
 		fprintf(stderr, "Error: Stack underflow");
 	}
-	while (ptr != NULL)
+	while (ptr)
 	{
 		printf("%d\n",ptr->n);
 		ptr = ptr->next;

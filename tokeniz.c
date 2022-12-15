@@ -9,49 +9,33 @@
  * Return: none
  */
 
-void tokeniz(char* line, int line_number)
+int tokeniz(char* line, int line_number, stack_t **stack)
 {
-	char *tok, *dilm = " $\t\r\n";
+	char *tok;
 	int i;
-	stack_t *ptr;
-	
 	instruction_t task[] = {
 		{"push", push_int},
 		{"pall", print_all},
 		{NULL, NULL},
 	};
-	printf("DEBUG LINE %d: %s", line_number, line);
-	tok = strtok(line, dilm);
-	printf("TOKEN 1: %s\n", tok);
-	ptr = malloc(sizeof(stack_t));
-	if (ptr == NULL)
+	tok = strtok(line, " $\t\r\n");
+	var_v.num = strtok(NULL, " $\t\r\n");
+	while (task[i].opcode)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		if (strcmp(tok, task[i].opcode) == 0)
+		{
+			task[i].f(stack, line_number);
+			return (0);
+		}
+		i++;
+	}
+	if (tok == NULL && task[i].opcode == NULL)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, tok);
+		free(line);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
-	while (tok != NULL)
-	{
-		i = 0;
-		while (task[i].opcode)
-		{
-			printf("task[%d].opcode = %s and %s\n",i ,task[i].opcode , tok);
-			if (strcmp(tok, task[i].opcode) == 0)
-			{
-				printf("TOKEN FOUND FOR tok  %s = task[i].opecode %s ",tok,task[i].opcode);
-				tok = strtok(NULL, dilm);
-				printf("VALUE = %s\n",tok);
-				if (!isNumber(tok))
-				{
-					fprintf(stderr,"L%d: usage: push integer\n",line_number);
-					exit(EXIT_FAILURE);
-				}
-				ptr->n = atoi(tok);
-				ptr->prev = NULL;
-				ptr->next = NULL;
-				task[i].f(&ptr, line_number);
-			}
-			++i;
-		}
-		tok = strtok(NULL, dilm);
-	}
+	return (1);
+
 }

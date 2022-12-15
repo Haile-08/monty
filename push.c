@@ -9,19 +9,36 @@
  * Return: none
  */
 
-void push_int(stack_t **stack, __attribute__((unused))unsigned int line_number)
+void push_int(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ptr = malloc(sizeof(stack_t));
-	if (temp == NULL)
+	stack_t *ptr;
+
+	if (var_v.num)
 	{
-		ptr->n = (*stack)->n;
-		ptr->next = NULL;
-		temp = ptr;
+		ptr = malloc(sizeof(stack_t));
+		if (ptr == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed");
+			exit(EXIT_FAILURE);
+		}
+		ptr->n = atoi(var_v.num);
+		if (*stack == NULL)
+		{
+			ptr->next = NULL;
+			ptr->prev = NULL;
+			*stack = ptr;
+		}
+		else
+		{
+			ptr->prev = NULL;
+			ptr->next = *stack;
+			*stack = ptr;
+		}
 	}
 	else
 	{
-		ptr->n = (*stack)->n;
-		temp->next = temp;
-		temp = ptr;
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
 	}
 }
