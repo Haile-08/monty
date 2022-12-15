@@ -16,6 +16,7 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 	instruction_t task[] = {
 		{"push", push_int},
 		{"pall", print_all},
+		{"pint", pint},
 		{NULL, NULL},
 	};
 	tok = strtok(line, " \n\t");

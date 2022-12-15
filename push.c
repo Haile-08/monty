@@ -13,7 +13,7 @@ void push_int(stack_t **stack, unsigned int line_number)
 {
 	stack_t *ptr;
 
-	if (var.num)
+	if (isNumber(strtok(var.num, "$\n\t")))
 	{
 		(void)line_number;
 		ptr = malloc(sizeof(stack_t));
