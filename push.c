@@ -22,7 +22,7 @@ void push_int(stack_t **stack, unsigned int line_number)
 			fprintf(stderr, "Error: malloc failed");
 			exit(EXIT_FAILURE);
 		}
-		ptr->n = atoi(var.num);
+		ptr->n = atoi(strtok(var.num, "$\n\t"));
 		if (*stack == NULL)
 		{
 			ptr->next = NULL;
