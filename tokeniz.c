@@ -17,6 +17,7 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 		{"push", push_int},
 		{"pall", print_all},
 		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL},
 	};
 	tok = strtok(line, " \n\t");
