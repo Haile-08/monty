@@ -28,6 +28,8 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 		{NULL, NULL},
 	};
 	tok = strtok(line, " \n\t");
+	if (strcmp(tok, "#") == 0)
+		return (0);
 	if (strcmp(tok, "$") == 0)
 		return (0);
 	var.num = strtok(NULL, " \n\t");
