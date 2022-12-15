@@ -1,1 +1,1 @@
-# The Monty language
+this project is mandatory
