@@ -23,7 +23,6 @@ void push_int(stack_t **stack, unsigned int line_number)
 			exit(EXIT_FAILURE);
 		}
 		ptr->n = atoi(var.num);
-		printf("VAR_NUM = %d", ptr->n);
 		if (*stack == NULL)
 		{
 			ptr->next = NULL;

@@ -37,8 +37,9 @@ int main(int ac, char* av[])
 	{
 		tokeniz(line,line_number, &stack);
 		line_number = line_number + 1;
-		free(line);
 	}
+	if (line)
+		free(line);
 	free_stack(stack);
 	fclose(fd);
 	return (0);
