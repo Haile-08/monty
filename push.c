@@ -13,15 +13,17 @@ void push_int(stack_t **stack, unsigned int line_number)
 {
 	stack_t *ptr;
 
-	if (var_v.num)
+	if (var.num)
 	{
+		(void)line_number;
 		ptr = malloc(sizeof(stack_t));
 		if (ptr == NULL)
 		{
 			fprintf(stderr, "Error: malloc failed");
 			exit(EXIT_FAILURE);
 		}
-		ptr->n = atoi(var_v.num);
+		ptr->n = atoi(var.num);
+		printf("VAR_NUM = %d", ptr->n);
 		if (*stack == NULL)
 		{
 			ptr->next = NULL;
@@ -41,4 +43,5 @@ void push_int(stack_t **stack, unsigned int line_number)
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
+
 }

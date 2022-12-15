@@ -38,12 +38,13 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct var
+typedef struct var_s
 {
 	char *num;
+	FILE *file;
 } var_t;
 
-extern var_t var_v;
+extern var_t var;
 
 int tokeniz(char* line, int line_number, stack_t **stack);
 void push_int(stack_t **stack, __attribute__((unused))unsigned int line_number);

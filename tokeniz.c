@@ -12,18 +12,21 @@
 int tokeniz(char* line, int line_number, stack_t **stack)
 {
 	char *tok;
-	int i;
+	int i = 0;
 	instruction_t task[] = {
 		{"push", push_int},
 		{"pall", print_all},
 		{NULL, NULL},
 	};
-	tok = strtok(line, " $\t\r\n");
-	var_v.num = strtok(NULL, " $\t\r\n");
-	while (task[i].opcode)
+	tok = strtok(line, " $\n\t");
+	printf("token 1 = %s\n", tok);
+	while (task[i].opcode != NULL)
 	{
+		printf("task[i].opcode != %s\n", task[i].opcode);
 		if (strcmp(tok, task[i].opcode) == 0)
 		{
+			var.num = strtok(NULL, " $\n\t");
+			printf("token 2 = %s\n", var.num);
 			task[i].f(stack, line_number);
 			return (0);
 		}
@@ -32,7 +35,7 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 	if (tok == NULL && task[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, tok);
-		free(line);
+		fclose(var.file);
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}

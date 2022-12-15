@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-var_t var_v = {0};
+var_t var = {NULL, NULL};
 
 /**
  * main - Entry point
@@ -26,6 +26,7 @@ int main(int ac, char* av[])
 		exit(EXIT_FAILURE);
 	}
 	fd = fopen(av[1], "r");
+	var.file = fd;
 	if (fd == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
@@ -35,8 +36,8 @@ int main(int ac, char* av[])
 	while ((c_read = getline(&line, &len, fd)) != -1)
 	{
 		tokeniz(line,line_number, &stack);
+		free(line);
 	}
-	free(line);
 	free_stack(stack);
 	fclose(fd);
 	return (0);
