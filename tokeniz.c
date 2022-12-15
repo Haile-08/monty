@@ -24,6 +24,7 @@ int tokeniz(char* line, int line_number, stack_t **stack)
 		{"sub", sub},
 		{"div", div_num},
 		{"mul", mul},
+		{"mod", mod},
 		{NULL, NULL},
 	};
 	tok = strtok(line, " \n\t");
